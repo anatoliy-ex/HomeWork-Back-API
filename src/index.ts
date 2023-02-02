@@ -6,7 +6,7 @@ const parserMiddleware = express.json()
 app.use(parserMiddleware)
 
 app.get('/', (req: Request, res: Response) => {
-    let helloWorld = 'Hello World!!!PPPP66666PP!!!';
+    let helloWorld = 'Hello66PP!!!';
     res.send(helloWorld)
 })
 
