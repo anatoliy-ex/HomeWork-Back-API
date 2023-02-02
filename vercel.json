@@ -1,0 +1,12 @@
+{
+  "version": 2,
+  "name": "homework-back-api",
+  "builds":
+  [
+    { "src": "index.ts", "use": "@vercel/node" }
+  ],
+  "routes":
+  [
+    { "src": "/(.*)", "dest": "src/index.ts" }
+  ]
+}
