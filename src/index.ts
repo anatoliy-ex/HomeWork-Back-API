@@ -8,7 +8,7 @@ app.use(parserMiddleware)
 const newDate = new Date;
 const newDateCreated = newDate.toISOString()
 const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString()
-const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
+//const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
 
 let bdVideos =
     [
@@ -24,10 +24,11 @@ let bdVideos =
         }
     ]
 
-app.get('/hometask_01/api/videos', (req: Request, res: Response) => {
+app.get('/', (req: Request, res: Response) => {
     let helloWorld = 'Hello!';
     res.send(helloWorld)
 })
+
 
 app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
     bdVideos = []
