@@ -5,9 +5,45 @@ const port = process.env.PORT || 3000
 const parserMiddleware = express.json()
 app.use(parserMiddleware)
 
-app.get('/', (req: Request, res: Response) => {
+const newDate = new Date;
+const newDateCreated = newDate.toISOString()
+const newDatePublic = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString()
+const arrayType: Array<string> = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
+
+let bdVideos =
+    [
+        {
+            id: 1,
+            title: "Video-0",
+            author: "Author-0",
+            canBeDownloaded: false,
+            minAgeRestriction: null,
+            createdAt: newDateCreated,
+            publicationDate: newDatePublic,
+            availableResolutions: ["P144"]
+        }
+    ]
+
+app.get('/hometask_01/api/videos', (req: Request, res: Response) => {
     let helloWorld = 'Hello!';
     res.send(helloWorld)
+})
+
+app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
+    bdVideos = []
+    res.sendStatus(204)
+})
+
+app.delete('/hometask_01/api/testing/all-data', (req: Request, res: Response) => {
+    let findID = bdVideos.find(v => v.id !== +req.params.id)
+
+    if(!findID)
+    {
+        res.sendStatus(404)
+    }
+
+    bdVideos = bdVideos.filter(v => v.id !== +req.params.id)
+    res.sendStatus(204)
 })
 
 app.listen(port, () => {
