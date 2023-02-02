@@ -21,7 +21,28 @@ let bdVideos =
             createdAt: newDateCreated,
             publicationDate: newDatePublic,
             availableResolutions: ["P144"]
-        }
+        },
+        {
+            id: 2,
+            title: "Video-0",
+            author: "Author-0",
+            canBeDownloaded: false,
+            minAgeRestriction: null,
+            createdAt: newDateCreated,
+            publicationDate: newDatePublic,
+            availableResolutions: ["P144"]
+        },
+        {
+            id: 3,
+            title: "Video-0",
+            author: "Author-0",
+            canBeDownloaded: false,
+            minAgeRestriction: null,
+            createdAt: newDateCreated,
+            publicationDate: newDatePublic,
+            availableResolutions: ["P144"]
+        },
+
     ]
 
 app.get('/videos', (req: Request, res: Response) => {
