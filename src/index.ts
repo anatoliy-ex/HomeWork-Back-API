@@ -88,21 +88,23 @@ app.get('/videos/:id', (req: Request, res: Response) =>
 
 app.delete('/testing/all-data', (req: Request, res: Response) =>
 {
-    bdVideos = []
+    bdVideos.splice(0,bdVideos.length)
     res.sendStatus(204)
 })
 
 app.delete('/videos/:id', (req: Request, res: Response) =>
 {
-    let findID = bdVideos.find(v => v.id !== +req.params.id)
-
-    if(!findID)
+    for(let i = 0; i < bdVideos.length; i++)
     {
+        if(bdVideos[i].id === +req.params.id)
+        {
+            bdVideos.splice(i,1);
+            res.sendStatus(204);
+            return
+        }
         res.sendStatus(404)
     }
-
-    bdVideos = bdVideos.filter(v => v.id !== +req.params.id)
-    res.sendStatus(204)
+    bdVideos.splice(0, bdVideos.length)
 })
 
 app.post('/videos', (req: Request, res: Response) =>
@@ -164,6 +166,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
     if(video)
     {
         errorArray.splice(0,errorArray.length)
+
         const title = req.body.title;
         const author = req.body.author;
         const minAgeRestriction = req.body.minAgeRestriction;
