@@ -45,11 +45,11 @@ let bdVideos =
 
     ]
 
-app.get('/hometask_01/api/videos', (req: Request, res: Response) => {
+app.get('/videos', (req: Request, res: Response) => {
     res.status(200).send(bdVideos)
 })
 
-app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
+app.get('/videos/:id', (req: Request, res: Response) => {
     let video = bdVideos.find(v => v.id === + req.params.id)
     if(video)
     {
@@ -62,12 +62,12 @@ app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
 })
 
 
-app.delete('/ht_01/api/testing/all-data', (req: Request, res: Response) => {
+app.delete('/testing/all-data', (req: Request, res: Response) => {
     bdVideos = []
     res.sendStatus(204)
 })
 
-app.delete('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
+app.delete('/videos/:id', (req: Request, res: Response) => {
     let findID = bdVideos.find(v => v.id !== +req.params.id)
 
     if(!findID)
