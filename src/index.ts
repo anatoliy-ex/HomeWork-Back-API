@@ -122,7 +122,7 @@ app.post('/videos', (req: Request, res: Response) =>
             minAgeRestriction: minAgeRestriction,
             createdAt: newDateCreated,
             publicationDate: newDateUpdate,
-            availableResolutions: ["P1080"],
+            availableResolutions: ["P144"],
         }
     if(!author || typeof  author !== "string" || author.length > 20)
     {
@@ -192,7 +192,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         {
             video.title = title;
             video.author = author;
-            video.availableResolutions = availableResolution || ["P1080"];
+            video.availableResolutions = availableResolution || ["P144"];
             video.canBeDownloaded = canBeDownloaded || false;
             video.minAgeRestriction = minAgeRestriction || newDateCreated;
             res.status(204).send(video)
