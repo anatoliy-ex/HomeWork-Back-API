@@ -45,12 +45,20 @@ let bdVideos =
 
     ]
 
-app.get('/videos', (req: Request, res: Response) => {
+app.get('/hometask_01/api/videos', (req: Request, res: Response) => {
     res.status(200).send(bdVideos)
 })
 
-app.get('/videos/:id', (req: Request, res: Response) => {
-   res.status(201)
+app.get('/hometask_01/api/videos/:id', (req: Request, res: Response) => {
+    let video = bdVideos.find(v => v.id === + req.params.id)
+    if(video)
+    {
+        res.send(video)
+    }
+    else
+    {
+        res.status(404)
+    }
 })
 
 
