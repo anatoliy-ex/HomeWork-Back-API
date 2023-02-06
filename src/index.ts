@@ -192,7 +192,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         {
             video.title = title;
             video.author = author;
-            video.availableResolutions = availableResolution || ["P144"];
+            video.availableResolutions = availableResolution ||  ["P144"];
             video.canBeDownloaded = canBeDownloaded || false;
             video.minAgeRestriction = minAgeRestriction || newDateCreated;
             res.status(204).send(video)
