@@ -5,9 +5,8 @@ const port = process.env.PORT || 3000
 const parserMiddleware = express.json()
 app.use(parserMiddleware)
 
-const newDate = new Date;
-const newDateCreated = newDate.toISOString()
-const newDateUpdate = new Date(newDate.setDate(newDate.getDate() + 1)).toISOString()
+const currentDate = new Date().toISOString()
+const tomorrowDate = new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString()
 type availableResolutions = string[];
 
 type VideosType =
@@ -122,8 +121,8 @@ app.post('/videos', (req: Request, res: Response) =>
         author: author,
         canBeDownloaded: canBeDownloaded || false,
         minAgeRestriction: minAgeRestriction || null,
-        createdAt: newDateCreated,
-        publicationDate: newDateUpdate,
+        createdAt: currentDate,
+        publicationDate: tomorrowDate,
         availableResolutions: ["P144"],
     };
 
@@ -172,7 +171,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         const minAgeRestriction = req.body.minAgeRestriction;
         const availableResolution = req.body.availableResolutions;
         const canBeDownloaded = req.body.canBeDownloaded;
-        const newDateUpdate = req.body.newDateUpdate;
+        const publicationDate = req.body.newDateUpdate;
 
         if(!author || typeof author !== "string" || author.length > 20)
         {
@@ -189,7 +188,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
             errorArray.push(errorCanBeDownloadedField)
         }
 
-        if(newDateUpdate && typeof newDateUpdate !== "string")
+        if(publicationDate && typeof publicationDate !== "string")
         {
             errorArray.push(errorPublicationDateField)
         }
@@ -200,7 +199,8 @@ app.put('/videos/:id', (req: Request, res: Response) =>
             video.author = author;
             video.availableResolutions = availableResolution ||  ["P144"];
             video.canBeDownloaded = canBeDownloaded || false;
-            video.minAgeRestriction = minAgeRestriction || newDateCreated;
+            video.minAgeRestriction = minAgeRestriction || null;
+            video.publicationDate = publicationDate || tomorrowDate
             res.status(204).send(video)
             return;
         }
