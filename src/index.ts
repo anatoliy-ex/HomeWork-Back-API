@@ -7,7 +7,7 @@ app.use(parserMiddleware)
 
 const currentDate = new Date().toISOString()
 const tomorrowDate = new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString()
-type availableResolutions = string[];
+type AvailableResolutions = string[];
 
 type VideosType =
 {
@@ -18,7 +18,7 @@ type VideosType =
     minAgeRestriction: null | number,
     createdAt: string,
     publicationDate: string,
-    availableResolutions: availableResolutions,
+    availableResolutions: AvailableResolutions,
 }
 
 type ErrorInnerMessageType =
@@ -123,7 +123,7 @@ app.post('/videos', (req: Request, res: Response) =>
         minAgeRestriction: minAgeRestriction || null,
         createdAt: currentDate,
         publicationDate: tomorrowDate,
-        availableResolutions: ["P144"],
+        availableResolutions: ["P144"] || req.body.availableResolutions,
     };
 
     errorArray.splice(0, errorArray.length)
