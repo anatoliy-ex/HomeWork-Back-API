@@ -114,16 +114,19 @@ app.post('/videos', (req: Request, res: Response) =>
     const availableResolution = req.body.availableResolutions;
     const canBeDownloaded = req.body.canBeDownloaded;
     const newVideo: VideosType =
-        {
-            id: +new Date(),
-            title: title,
-            author: author,
-            canBeDownloaded: canBeDownloaded,
-            minAgeRestriction: minAgeRestriction,
-            createdAt: newDateCreated,
-            publicationDate: newDateUpdate,
-            availableResolutions: ["P144"],
-        }
+    {
+        id: +new Date(),
+        title: title,
+        author: author,
+        canBeDownloaded: canBeDownloaded || false,
+        minAgeRestriction: minAgeRestriction || null,
+        createdAt: newDateCreated,
+        publicationDate: newDateUpdate,
+        availableResolutions: ["P144"],
+    };
+
+    errorArray.splice(0, errorArray.length)
+
     if(!author || typeof  author !== "string" || author.length > 20)
     {
         errorArray.push(errorAuthorField);
