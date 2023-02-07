@@ -63,7 +63,7 @@ const errorMinAgeRestrictionField =
 const errorAvailableResolutionField =
     {
         message: "Error",
-        field: "availableResolution",
+        field: "availableResolutions",
     };
 
 const errorPublicationDateField =
@@ -179,6 +179,11 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         if(canBeDownloaded && typeof canBeDownloaded !== "boolean")
         {
             errorArray.push(errorCanBeDownloadedField)
+        }
+
+        if(minAgeRestriction < 1 || minAgeRestriction > 18)
+        {
+            errorArray.push(errorMinAgeRestrictionField)
         }
 
         if(publicationDate && typeof publicationDate !== "string")
