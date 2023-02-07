@@ -158,7 +158,7 @@ app.post('/videos', (req: Request, res: Response) =>
     }
     if
     (
-        availableResolution&&!qualityCheck(availableResolution,videoResolutions)
+        availableResolutions && !qualityCheck(availableResolutions,videoResolutions)
     )
     {
         errorArray.push(errorAvailableResolutionField);
