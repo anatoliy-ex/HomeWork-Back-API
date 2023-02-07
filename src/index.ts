@@ -1,4 +1,4 @@
-import express from 'express'
+import express, {Request,Response} from 'express'
 import {h1VideosRouter} from "./routes/h1-videos-router";
 import {h1TestingRouter} from "./routes/h1-testing-router";
 

@@ -1,4 +1,4 @@
-import {Request, Response, Router} from 'express'
+import {Request, Response, Router} from "express"
 export const h1TestingRouter = Router({})
 
 type AvailableResolutions = string[];
@@ -13,7 +13,7 @@ type VideosType =
         publicationDate: string;
         availableResolutions: AvailableResolutions;
 }
-let dbVideos : VideosType[] = [];
+const dbVideos : VideosType[] = [];
 
 h1TestingRouter.delete('/all-data', (req: Request, res: Response) =>
 {
