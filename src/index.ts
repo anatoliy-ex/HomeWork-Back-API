@@ -51,25 +51,25 @@ const errorTitleField =
 const errorCanBeDownloadedField =
     {
         message: "Error",
-        field: "canBeDownloadedField",
+        field: "canBeDownloaded",
     };
 
 const errorMinAgeRestrictionField =
     {
         message: "Error",
-        field: "minAgeRestrictionField",
+        field: "minAgeRestriction",
     };
 
 const errorAvailableResolutionField =
     {
         message: "Error",
-        field: "availableResolutionField",
+        field: "availableResolution",
     };
 
 const errorPublicationDateField =
     {
         message: "Error",
-        field: "publicationDateField",
+        field: "publicationDate",
     };
 
 const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorsMessages
@@ -125,7 +125,7 @@ app.post('/videos', (req: Request, res: Response) =>
     }
     if(!title || typeof  title !== "string" || title.length > 40)
     {
-        errorArray.push(errorAuthorField);
+        errorArray.push(errorTitleField);
     }
     if(canBeDownloaded && typeof  canBeDownloaded !== "boolean")
     {
