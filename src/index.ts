@@ -11,14 +11,14 @@ type AvailableResolutions = string[];
 
 type VideosType =
 {
-    id: number,
-    title: string,
-    author: string,
-    canBeDownloaded: boolean,
-    minAgeRestriction: null | number,
-    createdAt: string,
-    publicationDate: string,
-    availableResolutions: AvailableResolutions,
+    id: number;
+    title: string;
+    author: string;
+    canBeDownloaded: boolean;
+    minAgeRestriction: null | number;
+    createdAt: string;
+    publicationDate: string;
+    availableResolutions: AvailableResolutions;
 }
 
 type ErrorInnerMessageType =
@@ -124,7 +124,7 @@ app.post('/videos', (req: Request, res: Response) =>
     const title = req.body.title;
     const author = req.body.author;
     const minAgeRestriction = req.body.minAgeRestriction;
-    const availableResolution = req.body.availableResolutions;
+    const availableResolutions = req.body.availableResolutions;
     const canBeDownloaded = req.body.canBeDownloaded;
     const newVideo: VideosType =
     {
@@ -135,7 +135,7 @@ app.post('/videos', (req: Request, res: Response) =>
         minAgeRestriction: minAgeRestriction || null,
         createdAt: currentDate,
         publicationDate: tomorrowDate,
-        availableResolutions: ["P144"] || req.body.availableResolutions,
+        availableResolutions: availableResolutions || ["P1080"],
     };
 
     errorArray.splice(0, errorArray.length)
