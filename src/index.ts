@@ -93,7 +93,7 @@ app.get('/videos/:id', (req: Request, res: Response) =>
     }
     else
     {
-        res.status(404)
+        res.sendStatus(404)
     }
 })
 
