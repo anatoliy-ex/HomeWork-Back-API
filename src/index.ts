@@ -33,7 +33,7 @@ const videoResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P144
 
 const errorOuterObject =
     {
-        errorMessage: []
+        errorsMessages: []
     };
 
 const errorAuthorField =
@@ -72,7 +72,7 @@ const errorPublicationDateField =
         field: "publicationDateField",
     };
 
-const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorMessage
+const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorsMessages
 
 const qualityCheck = (arr: string[], arr2: string[])=>
 {
