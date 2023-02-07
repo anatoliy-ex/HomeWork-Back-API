@@ -34,43 +34,43 @@ const videoResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P144
 const errorOuterObject =
     {
         errorMessage: []
-    }
+    };
 
 const errorAuthorField =
     {
         message: "Error",
         field: "author",
-    }
+    };
 
 const errorTitleField =
     {
         message: "Error",
         field: "title",
-    }
+    };
 
 const errorCanBeDownloadedField =
     {
         message: "Error",
         field: "canBeDownloadedField",
-    }
+    };
 
 const errorMinAgeRestrictionField =
     {
         message: "Error",
         field: "minAgeRestrictionField",
-    }
+    };
 
 const errorAvailableResolutionField =
     {
         message: "Error",
         field: "availableResolutionField",
-    }
+    };
 
 const errorPublicationDateField =
     {
         message: "Error",
         field: "publicationDateField",
-    }
+    };
 
 const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorMessage
 
@@ -169,7 +169,7 @@ app.post('/videos', (req: Request, res: Response) =>
         res.status(201).send(newVideo);
         return;
     }
-    res.status(400).send(errorOuterObject)
+    res.status(400).send(errorOuterObject);
 })
 
 app.put('/videos/:id', (req: Request, res: Response) =>
@@ -211,7 +211,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         {
             video.title = title;
             video.author = author;
-            video.availableResolutions = availableResolution ||  ["P144"];
+            video.availableResolutions = availableResolution ||  ["P1080"];
             video.canBeDownloaded = canBeDownloaded || false;
             video.minAgeRestriction = minAgeRestriction || null;
             video.publicationDate = publicationDate || tomorrowDate
