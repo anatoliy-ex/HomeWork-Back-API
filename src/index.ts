@@ -166,8 +166,10 @@ app.post('/videos', (req: Request, res: Response) =>
     if(errorArray.length === 0)
     {
         dbVideos.push(newVideo);
-        res.status(201).send(newVideo)
+        res.status(201).send(newVideo);
+        return;
     }
+    res.status(400).send(errorOuterObject)
 })
 
 app.put('/videos/:id', (req: Request, res: Response) =>
@@ -192,7 +194,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
 
         if(!title || typeof title !== "string" || title.length > 40)
         {
-            errorArray.push(errorTitleField)
+            errorArray.push(errorTitleField);
         }
 
         if(canBeDownloaded && typeof canBeDownloaded !== "boolean")
