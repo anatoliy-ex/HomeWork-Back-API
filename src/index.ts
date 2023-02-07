@@ -97,26 +97,6 @@ app.get('/videos/:id', (req: Request, res: Response) =>
     }
 })
 
-app.delete('/testing/all-data', (req: Request, res: Response) =>
-{
-    dbVideos.splice(0,dbVideos.length)
-    res.sendStatus(204)
-})
-
-app.delete('/videos/:id', (req: Request, res: Response) =>
-{
-    for(let i = 0; i < dbVideos.length; i++)
-    {
-        if(dbVideos[i].id === +req.params.id)
-        {
-            dbVideos.splice(i,1);
-            res.sendStatus(204);
-            return;
-        }
-    }
-    res.sendStatus(404)
-})
-
 app.post('/videos', (req: Request, res: Response) =>
 {
 
@@ -221,6 +201,26 @@ app.put('/videos/:id', (req: Request, res: Response) =>
     }
     res.sendStatus(404)
 })
+
+app.delete('/testing/all-data', (req: Request, res: Response) =>
+{
+    dbVideos.splice(0,dbVideos.length)
+    res.sendStatus(204)
+})
+
+app.delete('/videos/:id', (req: Request, res: Response) =>
+{
+    for(let i = 0; i < dbVideos.length; i++)
+    {
+        if(dbVideos[i].id === +req.params.id)
+        {
+            dbVideos.splice(i,1);
+            res.sendStatus(204);
+            return;
+        }
+    }
+    res.sendStatus(404)
+});
 
 app.listen(port, () => {
     console.log(`Example app listening on port ${port}`)
