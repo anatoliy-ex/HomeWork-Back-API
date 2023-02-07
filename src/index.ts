@@ -111,7 +111,7 @@ app.delete('/videos/:id', (req: Request, res: Response) =>
         {
             dbVideos.splice(i,1);
             res.sendStatus(204);
-            return
+            return;
         }
     }
     res.sendStatus(404)
