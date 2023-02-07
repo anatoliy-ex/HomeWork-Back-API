@@ -26,34 +26,46 @@ type ErrorInnerMessageType =
         message: string,
         field: string
     }
-let bdVideos : VideosType[] = [];
+
+let dbVideos : VideosType[] = [];
+
 const videoResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
-const errorOuterObject = {errorMessage: []}
+
+const errorOuterObject =
+    {
+        errorMessage: []
+    }
+
 const errorAuthorField =
-{
-    message: "Error",
-    field: "author",
-}
+    {
+        message: "Error",
+        field: "author",
+    }
+
 const errorTitleField =
     {
         message: "Error",
         field: "title",
     }
+
 const errorCanBeDownloadedField =
     {
         message: "Error",
         field: "canBeDownloadedField",
     }
+
 const errorMinAgeRestrictionField =
     {
         message: "Error",
         field: "minAgeRestrictionField",
     }
+
 const errorAvailableResolutionField =
     {
         message: "Error",
         field: "availableResolutionField",
     }
+
 const errorPublicationDateField =
     {
         message: "Error",
@@ -69,12 +81,12 @@ const qualityCheck = (arr: string[], arr2: string[])=>
 
 app.get('/videos', (req: Request, res: Response) =>
 {
-    res.status(200).send(bdVideos)
+    res.status(200).send(dbVideos)
 })
 
 app.get('/videos/:id', (req: Request, res: Response) =>
 {
-    let video = bdVideos.find(v => v.id === + req.params.id)
+    let video = dbVideos.find(v => v.id === + req.params.id)
     if(video)
     {
         res.send(video)
@@ -87,23 +99,23 @@ app.get('/videos/:id', (req: Request, res: Response) =>
 
 app.delete('/testing/all-data', (req: Request, res: Response) =>
 {
-    bdVideos.splice(0,bdVideos.length)
+    dbVideos.splice(0,dbVideos.length)
     res.sendStatus(204)
 })
 
 app.delete('/videos/:id', (req: Request, res: Response) =>
 {
-    for(let i = 0; i < bdVideos.length; i++)
+    for(let i = 0; i < dbVideos.length; i++)
     {
-        if(bdVideos[i].id === +req.params.id)
+        if(dbVideos[i].id === +req.params.id)
         {
-            bdVideos.splice(i,1);
+            dbVideos.splice(i,1);
             res.sendStatus(204);
             return
         }
         res.sendStatus(404)
     }
-    bdVideos.splice(0, bdVideos.length)
+    dbVideos.splice(0, dbVideos.length)
 })
 
 app.post('/videos', (req: Request, res: Response) =>
@@ -153,14 +165,14 @@ app.post('/videos', (req: Request, res: Response) =>
     }
     if(errorArray.length === 0)
     {
-        bdVideos.push(newVideo);
+        dbVideos.push(newVideo);
         res.status(201).send(newVideo)
     }
 })
 
 app.put('/videos/:id', (req: Request, res: Response) =>
 {
-    const video = bdVideos.find((video :VideosType) => video.id === +req.params.id);
+    const video = dbVideos.find((video :VideosType) => video.id === +req.params.id);
 
     if(video)
     {
@@ -171,7 +183,7 @@ app.put('/videos/:id', (req: Request, res: Response) =>
         const minAgeRestriction = req.body.minAgeRestriction;
         const availableResolution = req.body.availableResolutions;
         const canBeDownloaded = req.body.canBeDownloaded;
-        const publicationDate = req.body.newDateUpdate;
+        const publicationDate = req.body.publicationDate;
 
         if(!author || typeof author !== "string" || author.length > 20)
         {
