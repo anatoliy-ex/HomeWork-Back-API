@@ -1,4 +1,4 @@
-import {Request, Response, Router} from 'express'
+import {Request, Response, Router} from "express"
 export const hwVideosRouter = Router({})
 
 type AvailableResolutions = string[];

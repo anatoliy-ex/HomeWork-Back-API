@@ -8,7 +8,7 @@ const port = 3000
 const parserMiddleware = bodyParser({})
 app.use(parserMiddleware)
 
-app.use(express.json)
+//app.use(express.json)
 
 app.use("/videos", hwVideosRouter)
 app.use("/testing", hwTestingRouter)
