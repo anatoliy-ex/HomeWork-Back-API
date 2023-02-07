@@ -115,7 +115,7 @@ app.delete('/videos/:id', (req: Request, res: Response) =>
         }
         res.sendStatus(404)
     }
-    dbVideos.splice(0, dbVideos.length)
+    res.sendStatus(404)
 })
 
 app.post('/videos', (req: Request, res: Response) =>
