@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express"
-export const h1TestingRouter = Router({})
+export const hwTestingRouter = Router({})
 
 type AvailableResolutions = string[];
 type VideosType =
@@ -15,7 +15,7 @@ type VideosType =
 }
 const dbVideos : VideosType[] = [];
 
-h1TestingRouter.delete('/all-data', (req: Request, res: Response) =>
+hwTestingRouter.delete('/all-data', (req: Request, res: Response) =>
 {
     dbVideos.splice(0,dbVideos.length)
     res.sendStatus(204)

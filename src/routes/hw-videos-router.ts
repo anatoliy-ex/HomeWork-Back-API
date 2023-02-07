@@ -1,8 +1,6 @@
 import {Request, Response, Router} from 'express'
-export const h1VideosRouter = Router({})
+export const hwVideosRouter = Router({})
 
-const currentDate = new Date().toISOString()
-const tomorrowDate = new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString()
 type AvailableResolutions = string[];
 
 type VideosType =
@@ -26,6 +24,8 @@ type ErrorInnerMessageType =
 let dbVideos : VideosType[] = [];
 
 const videoResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
+const currentDate = new Date().toISOString()
+const tomorrowDate = new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString()
 
 const errorOuterObject =
     {
@@ -75,12 +75,12 @@ const qualityCheck = (arr: string[], arr2: string[])=>
     return arr.every((res: string) => arr2.includes(res))
 }
 
-h1VideosRouter.get('/', (req: Request, res: Response) =>
+hwVideosRouter.get('/', (req: Request, res: Response) =>
 {
     res.status(200).send(dbVideos)
 })
 
-h1VideosRouter.get('/:id', (req: Request, res: Response) =>
+hwVideosRouter.get('/:id', (req: Request, res: Response) =>
 {
     let video = dbVideos.find(v => v.id === + req.params.id)
     if(video)
@@ -93,7 +93,7 @@ h1VideosRouter.get('/:id', (req: Request, res: Response) =>
     }
 })
 
-h1VideosRouter.post('/', (req: Request, res: Response) =>
+hwVideosRouter.post('/', (req: Request, res: Response) =>
 {
 
     const title = req.body.title;
@@ -147,7 +147,7 @@ h1VideosRouter.post('/', (req: Request, res: Response) =>
     res.status(400).send(errorOuterObject);
 })
 
-h1VideosRouter.put('/:id', (req: Request, res: Response) =>
+hwVideosRouter.put('/:id', (req: Request, res: Response) =>
 {
     const video = dbVideos.find((video :VideosType) => video.id === +req.params.id);
 
@@ -203,7 +203,7 @@ h1VideosRouter.put('/:id', (req: Request, res: Response) =>
     res.sendStatus(404)
 })
 
-h1VideosRouter.delete('/:id', (req: Request, res: Response) =>
+hwVideosRouter.delete('/:id', (req: Request, res: Response) =>
 {
     for(let i = 0; i < dbVideos.length; i++)
     {

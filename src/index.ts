@@ -1,13 +1,14 @@
 import express, {Request,Response} from 'express'
-import {h1VideosRouter} from "./routes/h1-videos-router";
-import {h1TestingRouter} from "./routes/h1-testing-router";
+import {hwVideosRouter} from "./routes/hw-videos-router";
+import {hwTestingRouter} from "./routes/hw-testing-router";
 
 const app = express()
-const port = process.env.PORT || 3000
+const port = 3000
 
 app.use(express.json)
-app.use("/videos", h1VideosRouter)
-app.use("/testing", h1TestingRouter)
+
+app.use("/videos", hwVideosRouter)
+app.use("/testing", hwTestingRouter)
 
 app.listen(port, () =>
 {
