@@ -1,5 +1,5 @@
 import {Request, Response, Router} from "express"
-export const hwTestingRouter = Router()
+export const hwTestingRouter = Router({})
 
 type AvailableResolutions = string[];
 type VideosType =
