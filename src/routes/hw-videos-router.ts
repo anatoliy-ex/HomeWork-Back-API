@@ -5,7 +5,7 @@ type AvailableResolutions = string[];
 
 type VideosType =
 {
-         id: number;
+        id: number;
         title: string;
         author: string;
         canBeDownloaded: boolean;
