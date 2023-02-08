@@ -2,6 +2,7 @@ import {Request, Response, Router} from "express"
 export const hwTestingRouter = Router({})
 
 type AvailableResolutions = string[];
+
 type VideosType =
 {
         id: number;
@@ -13,6 +14,7 @@ type VideosType =
         publicationDate: string;
         availableResolutions: AvailableResolutions;
 }
+
 const dbVideos : VideosType[] = [];
 
 hwTestingRouter.delete('/all-data', (req: Request, res: Response) =>
