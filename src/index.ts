@@ -6,10 +6,8 @@ import bodyParser from "body-parser";
 const app = express()
 const port = 3000
 const parserMiddleware = bodyParser({})
+
 app.use(parserMiddleware)
-
-//app.use(express.json)
-
 app.use("/videos", hwVideosRouter)
 app.use("/testing", hwTestingRouter)
 
