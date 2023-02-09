@@ -1,36 +1,14 @@
 import {Request, Response, Router} from "express"
-export const hwVideosRouter = Router({})
-
-type AvailableResolutions = string[];
-
-type VideosType =
-{
-        id: number;
-        title: string;
-        author: string;
-        canBeDownloaded: boolean;
-        minAgeRestriction: null | number;
-        createdAt: string;
-        publicationDate: string;
-        availableResolutions: AvailableResolutions;
-}
-
-type ErrorInnerMessageType =
-    {
-        message: string,
-        field: string
-    }
-
-let dbVideos : VideosType[] = [];
+import {tomorrowDate, videosRepository} from "../repositories/videos-repository";
+import {ErrorInnerMessageType, qualityCheck, VideoDto} from "../types/videos-types";
+export const hw1VideosRouter = Router({})
 
 const videoResolutions = ["P144", "P240", "P360", "P480", "P720", "P1080", "P1440", "P2160"]
-const currentDate = new Date().toISOString()
-const tomorrowDate = new Date(Date.now() + 1000 * 60 * 60 * 24).toISOString()
-
 const errorOuterObject =
     {
         errorsMessages: []
     };
+const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorsMessages
 
 const errorAuthorField =
     {
@@ -68,21 +46,15 @@ const errorPublicationDateField =
         field: "publicationDate",
     };
 
-const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorsMessages
-
-const qualityCheck = (arr: string[], arr2: string[])=>
+hw1VideosRouter.get('/', (req: Request, res: Response) =>
 {
-    return arr.every((res: string) => arr2.includes(res))
-}
-
-hwVideosRouter.get('/', (req: Request, res: Response) =>
-{
-    res.status(200).send(dbVideos)
+    const videos = videosRepository.allVideos(req.body.dbVideos)
+    res.status(200).send(videos)
 })
-
-hwVideosRouter.get('/:id', (req: Request, res: Response) =>
+//+
+hw1VideosRouter.get('/:id', (req: Request, res: Response) =>
 {
-    let video = dbVideos.find(v => v.id === + req.params.id)
+    let video = videosRepository.getVideosByID(+req.params.id)
     if(video)
     {
         res.send(video)
@@ -93,26 +65,30 @@ hwVideosRouter.get('/:id', (req: Request, res: Response) =>
     }
 })
 
-hwVideosRouter.post('/', (req: Request, res: Response) =>
+hw1VideosRouter.post('/', (req: Request, res: Response) =>
 {
-
+    //Пример
+    //Validation...
+    //const createdVideo2 = videosRepository.createVideos2(req.body)
+    //res.status(200).send(createdVideo2)
+    //return ;
+    //Конец примера
     const title = req.body.title;
     const author = req.body.author;
     const minAgeRestriction = req.body.minAgeRestriction;
     const availableResolutions = req.body.availableResolutions;
     const canBeDownloaded = req.body.canBeDownloaded;
-    const newVideo: VideosType =
+    const newVideo: VideoDto =
         {
+            //TODO move in repo
             id: +new Date(),
             title: title,
             author: author,
             canBeDownloaded: canBeDownloaded || false,
             minAgeRestriction: minAgeRestriction || null,
-            createdAt: currentDate,
-            publicationDate: tomorrowDate,
             availableResolutions: availableResolutions || ["P1080"],
         };
-
+    const errorArray : ErrorInnerMessageType [] = errorOuterObject.errorsMessages
     errorArray.splice(0, errorArray.length)
 
     if(!author || typeof  author !== "string" || author.length > 20)
@@ -140,16 +116,16 @@ hwVideosRouter.post('/', (req: Request, res: Response) =>
     }
     if(errorArray.length === 0)
     {
-        dbVideos.push(newVideo);
-        res.status(201).send(newVideo);
+        const createdVideo = videosRepository.createVideos(newVideo)
+        res.status(201).send(createdVideo);
         return;
     }
     res.status(400).send(errorOuterObject);
 })
 
-hwVideosRouter.put('/:id', (req: Request, res: Response) =>
+hw1VideosRouter.put('/:id', (req: Request, res: Response) =>
 {
-    const video = dbVideos.find((video :VideosType) => video.id === +req.params.id);
+    let video = videosRepository.updateVideos(+req.body.id)
 
     if(video)
     {
@@ -203,16 +179,15 @@ hwVideosRouter.put('/:id', (req: Request, res: Response) =>
     res.sendStatus(404)
 })
 
-hwVideosRouter.delete('/:id', (req: Request, res: Response) =>
+hw1VideosRouter.delete('/:id', (req: Request, res: Response) =>
 {
-    for(let i = 0; i < dbVideos.length; i++)
+    const isDeleted = videosRepository.deleteVideos(+req.params.id)
+    if(isDeleted)
     {
-        if(dbVideos[i].id === +req.params.id)
-        {
-            dbVideos.splice(i,1);
-            res.sendStatus(204);
-            return;
-        }
+        res.sendStatus(204);
     }
-    res.sendStatus(404)
+    else
+    {
+        res.sendStatus(404)
+    }
 });
