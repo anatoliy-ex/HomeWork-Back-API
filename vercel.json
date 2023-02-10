@@ -1,12 +1,10 @@
 {
   "version": 2,
-  "name": "homework-back-api",
-  "builds":
-  [
-    {  "src": "src/index.ts", "use": "@vercel/node" }
+  "name": "music-album",
+  "builds": [
+    { "src": "src/index.ts", "use": "@vercel/node" }
   ],
-  "routes":
-  [
+  "routes": [
     { "src": "/(.*)", "dest": "src/index.ts" }
   ]
 }
