@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "name": "music-album",
+  "name": "hw-api",
   "builds":
   [
     { "src": "src/index.ts",
