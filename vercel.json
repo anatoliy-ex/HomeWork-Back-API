@@ -1,6 +1,5 @@
 {
   "version": 2,
-  "name": "hwapi",
   "builds":
   [
     { "src": "src/index.ts",
