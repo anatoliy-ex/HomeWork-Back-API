@@ -48,7 +48,8 @@ const errorPublicationDateField =
 
 hw1VideosRouter.get('/', (req: Request, res: Response) =>
 {
-    const videos = videosRepository.allVideos(req.body.dbVideos)
+    console.log('CATCH')
+    const videos = videosRepository.allVideos()
     res.status(200).send(videos)
 })
 //+
